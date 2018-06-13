@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/_5sdp"
+    android:id="@+id/cardItem"
+    app:cardBackgroundColor="@android:color/white"
+    android:layout_marginBottom="@dimen/_10sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+<android.support.constraint.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
+    android:layout_marginBottom="@dimen/_8sdp"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageViewItem"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+
+        android:src="@mipmap/ic_launcher_round"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/txt_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="@dimen/_4sdp"
+        android:text="@string/txt_item_title"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageViewItem"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginRight="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:textStyle="bold"
+        android:text="@string/txt_item_price"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_right"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        style="@style/Divider"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/line_divider"
+        android:background="@drawable/line_separater"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewItem" />
+
+    <TextView
+        android:id="@+id/txt_item_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/txt_item_detail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_divider" />
+
+    <TextView
+        android:id="@+id/txt_item_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:drawablePadding="@dimen/_5sdp"
+        android:drawableLeft="@drawable/ic_views"
+        android:text="@string/txt_item_likes"
+        app:layout_constraintEnd_toStartOf="@+id/txt_item_views"
+        app:layout_constraintStart_toEndOf="@+id/txt_item_detail"
+        app:layout_constraintTop_toBottomOf="@+id/line_divider" />
+
+    <TextView
+        android:id="@+id/txt_item_views"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:layout_marginRight="@dimen/_8sdp"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/ic_views"
+        android:text="@string/txt_item_views"
+        android:drawablePadding="@dimen/_5sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_divider" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_vertical_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/_16sdp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_vertical_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_end="@dimen/_16sdp" />
+
+
+</android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

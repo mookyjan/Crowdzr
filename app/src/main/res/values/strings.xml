@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">CrowdZr</string>
+    <string name="txt_sign_in_title">SIGN IN</string>
+    <string name="txt_hint_email">Email</string>
+    <string name="txt_hint_password">Password</string>
+    <string name="txt_forgot_password">FORGOT PASSWORD?</string>
+    <string name="txt_sign_in_with">SIGN IN WITH</string>
+    <string name="txt_no_account">If you don\'t have account </string>
+    <string name="txt_sing_up_here">SIGN UP HERE</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_request_fragment">Requests</string>
+    <string name="title_stacks_fragment">Stacks</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Aliza White</string>
+    <string name="nav_header_subtitle">alozawhite101@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!--home activity-->
+    <string name="title_card_feature">Feature</string>
+    <string name="title_card_trending">Trending</string>
+    <string name="title_card_ending_soon">Ending Soon</string>
+    <string name="txt_notification">Notification will come here</string>
+    <string name="txt_item_title">USB 2.0</string>
+    <string name="txt_item_price">$19.00</string>
+    <string name="txt_item_detail">Expiring in 6 days 2 hours 5 mins</string>
+    <string name="txt_item_likes">2000</string>
+    <string name="txt_item_views">3000</string>
+
+    <!--navigation drawer titles-->
+    <string name="menu_home">Home</string>
+    <string name="menu_inbox">Inbox</string>
+    <string name="menu_notification">Notifications</string>
+    <string name="menu_favourite">Favourite</string>
+    <string name="menu_shortcuts">Shortcuts</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_myrequests">My Requests</string>
+    <string name="menu_manage_sales">Manage Sales</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

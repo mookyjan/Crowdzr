@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_inbox"
+            android:icon="@drawable/ic_inbox"
+            app:actionViewClass="android.widget.TextView"
+            android:title="@string/menu_inbox" />
+        <item
+            android:id="@+id/nav_notification"
+            android:icon="@drawable/ic_menu_slideshow"
+            app:actionViewClass="android.widget.TextView"
+            android:title="@string/menu_notification" />
+        <item
+            android:id="@+id/nav_favourite"
+            android:icon="@drawable/ic_favourite"
+            app:actionViewClass="android.widget.TextView"
+            android:title="@string/menu_favourite" />
+        <item
+            android:id="@+id/nav_shortcut"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/menu_shortcuts" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/menu_profile" />
+            <item
+                android:id="@+id/nav_requests"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/menu_myrequests" />
+            <item
+                android:id="@+id/nav_manage_sales"
+                android:icon="@drawable/ic_sales"
+                android:title="@string/menu_manage_sales" />
+        </menu>
+    </item>
+
+</menu>
