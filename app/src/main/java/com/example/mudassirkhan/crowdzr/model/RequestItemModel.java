@@ -1,4 +1,4 @@
-package com.example.mudassirkhan.crowdzr;
+package com.example.mudassirkhan.crowdzr.model;
 
 import android.widget.ImageView;
 import android.widget.TextView;

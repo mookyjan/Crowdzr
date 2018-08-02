@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.sales.detail.MSDetailChatFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <!--<android.support.v7.widget.CardView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/hello_blank_fragment" >-->
+
+
+    <!--</android.support.v7.widget.CardView>-->
+
+
+    <!--<de.hdodenhof.circleimageview.CircleImageView-->
+        <!--android:id="@+id/circleImageView3"-->
+        <!--android:layout_width="@dimen/_50sdp"-->
+        <!--android:layout_height="@dimen/_50sdp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginRight="8dp"-->
+        <!--android:src="@drawable/profile_pic"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/cardView"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_right"-->
+        <!--tools:layout_editor_absoluteY="235dp" />-->
+
+    <!--<TextView-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="8dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:text="@string/txt_chat"-->
+        <!--android:paddingTop="@dimen/_15sdp"-->
+        <!--app:layout_constraintVertical_bias="0.5"-->
+        <!--android:background="@color/colorWhite"-->
+        <!--app:layout_constraintEnd_toStartOf="@id/guideline_vertical_right"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/circleImageView3" />-->
+
+
+    <include
+        android:id="@+id/chat_user"
+        layout="@layout/single_item_chat_user"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_left"
+        app:layout_constraintRight_toRightOf="@id/guideline_vertical_right"
+        app:layout_constraintTop_toTopOf="parent"></include>
+
+    <include
+        layout="@layout/single_item_chat_owner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintTop_toBottomOf="@+id/chat_user"
+        app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_left"
+        app:layout_constraintRight_toRightOf="@id/guideline_vertical_right"
+        tools:layout_editor_absoluteX="16dp" />
+
+
+
+
+
+    <android.support.constraint.Guideline
+        android:layout_width="@dimen/_2sdp"
+        android:layout_height="match_parent"
+        app:layout_constraintGuide_begin="@dimen/_15sdp"
+        android:orientation="vertical"
+        android:id="@+id/guideline_vertical_left"
+        />
+
+    <android.support.constraint.Guideline
+        android:layout_width="@dimen/_2sdp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/_15sdp"
+        android:id="@+id/guideline_vertical_right"
+
+        />
+
+</android.support.constraint.ConstraintLayout>

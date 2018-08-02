@@ -10,7 +10,7 @@
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/txt_notification_stack"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
@@ -18,7 +18,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:drawableLeft="@android:drawable/ic_notification_overlay"
+        android:drawablePadding="@dimen/_10sdp"
+        android:drawableLeft="@drawable/ic_notification"
         android:text="@string/txt_notification"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left"

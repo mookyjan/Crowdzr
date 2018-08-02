@@ -1,6 +1,8 @@
 package com.example.mudassirkhan.crowdzr;
 
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -25,24 +27,48 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.mudassirkhan.crowdzr.adapter.HomePagerAdapter;
+import com.example.mudassirkhan.crowdzr.ui.BackableFragment;
+import com.example.mudassirkhan.crowdzr.ui.favorite.FavoriteFragment;
 import com.example.mudassirkhan.crowdzr.ui.home.RequestDetailFragment;
 import com.example.mudassirkhan.crowdzr.ui.home.RequestsFragment;
+import com.example.mudassirkhan.crowdzr.ui.inbox.InboxFragment;
+import com.example.mudassirkhan.crowdzr.ui.profile.ProfileFragment;
+import com.example.mudassirkhan.crowdzr.ui.request.AddRequestFragment;
+import com.example.mudassirkhan.crowdzr.ui.sales.ManageSalesFragment;
+import com.example.mudassirkhan.crowdzr.ui.stack.MyStacksFragment;
 import com.example.mudassirkhan.crowdzr.ui.stack.StacksFragment;
+import com.example.mudassirkhan.crowdzr.ui.user.UserDetailFragment;
+
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         RequestsFragment.OnFragmentInteractionListener,StacksFragment.OnFragmentInteractionListener {
 
     //Create these objects above OnCreate()of your main activity
+    LinearLayout linearLayoutInbox,linearLayoutNotification,linearLayoutFavorite;
     TextView menu_inbox,menu_notification,menu_favourite;
+   public TabLayout tabLayout;
+   public ViewPager viewPager;
+   public Toolbar toolbar;
+   public View viewAppBar;
+    DrawerLayout drawer;
+    // index to identify current nav menu item
+    public static int navItemIndex = 0;
+    // tags used to attach the fragments
+    private static final String TAG_HOME = "home";
+    private static final String TAG_INBOX = "inbox";
+    private static final String TAG_FAVORITES = "favorites";
+    private static final String TAG_NOTIFICATIONS = "notifications";
+    private static final String TAG_SETTINGS = "settings";
+    public static String CURRENT_TAG = TAG_HOME;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        TabLayout tabLayout=(TabLayout)findViewById(R.id.tab_layout);
-        ViewPager viewPager=(ViewPager)findViewById(R.id.viewPagerHome);
+         tabLayout=(TabLayout)findViewById(R.id.tab_layout);
+         viewPager=(ViewPager)findViewById(R.id.viewPagerHome);
         HomePagerAdapter homePagerAdapter=new HomePagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(homePagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -71,7 +97,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        viewAppBar=(View)findViewById(R.id.app_bar_home);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -80,15 +107,27 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+//        if (savedInstanceState == null) {
+//            navItemIndex = 0;
+//            CURRENT_TAG = TAG_HOME;
+//            getHomeFragment();
+//        }
 
 //These lines should be added in the OnCreate() of your main activity
-        menu_inbox=(TextView) MenuItemCompat.getActionView(navigationView.getMenu().
-                findItem(R.id.nav_inbox));
-        menu_notification=(TextView) MenuItemCompat.getActionView(navigationView.getMenu().
-                findItem(R.id.nav_notification));
-        menu_favourite=(TextView) MenuItemCompat.getActionView(navigationView.getMenu().
-                findItem(R.id.nav_favourite));
-//This method will initialize the count value
+//        menu_inbox=(TextView) MenuItemCompat.getActionView(navigationView.getMenu().
+//                findItem(R.id.nav_inbox));
+        //TODO change other menu item also if need
+        linearLayoutInbox = (LinearLayout) navigationView.getMenu().findItem(R.id.nav_inbox).getActionView();
+        menu_inbox=linearLayoutInbox.findViewById(R.id.txt_menu);
+        linearLayoutNotification=(LinearLayout)navigationView.getMenu().findItem(R.id.nav_notification).getActionView();
+        menu_notification=(TextView) linearLayoutNotification.findViewById(R.id.txt_menu);
+        linearLayoutFavorite=(LinearLayout)navigationView.getMenu().findItem(R.id.nav_favourite).getActionView();
+        menu_favourite=(TextView)linearLayoutFavorite.findViewById(R.id.txt_menu);
+//        menu_notification=(TextView) MenuItemCompat.getActionView(navigationView.getMenu().
+//                findItem(R.id.nav_notification));
+//        menu_favourite=(TextView) MenuItemCompat.getActionView(navigationView.getMenu().
+//                findItem(R.id.nav_favourite));
+        // This method will initialize the count value
         initializeCountDrawer();
     }
 
@@ -99,8 +138,25 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            // if there is a fragment and the back stack of this fragment is not empty,
+//            // then emulate 'onBackPressed' behaviour, because in default, it is not working
+            FragmentManager fm = getSupportFragmentManager();
+            for (Fragment frag : fm.getFragments()) {
+                if (frag.isVisible()) {
+                    FragmentManager childFm = frag.getChildFragmentManager();
+                    if (childFm.getBackStackEntryCount() > 0) {
+                        childFm.popBackStack();
+                        return;
+                    }
+                }
+            }
+
+     //       tellFragments();
+//            super.onBackPressed();
+
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -127,25 +183,26 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void initializeCountDrawer(){
 
         //Gravity property aligns the text
-        menu_inbox.setGravity(Gravity.CENTER_VERTICAL);
-        menu_inbox.setTypeface(null, Typeface.BOLD);
-        menu_inbox.setTextColor(getResources().getColor(R.color.colorAccent));
-        menu_inbox.setText("02");
-        menu_notification.setGravity(Gravity.CENTER_VERTICAL);
+//        menu_inbox.setGravity(Gravity.CENTER_VERTICAL);
+//        menu_inbox.setTypeface(null, Typeface.BOLD);
+//        menu_inbox.setTextColor(getResources().getColor(R.color.colorAccent));
+//        menu_inbox.setText("02");
+        menu_notification.setGravity(Gravity.CENTER);
         menu_notification.setTypeface(null,Typeface.BOLD);
-        menu_notification.setTextSize(20);
+        menu_notification.setTextSize(15);
         menu_notification.setPadding(20,0,20,0);
-        menu_notification.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+        menu_notification.setBackgroundResource(R.drawable.menu_back);
         menu_notification.setTextColor(getResources().getColor(R.color.colorWhite));
+        GradientDrawable background = (GradientDrawable) menu_notification.getBackground();
+      //  menu_notification.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+        background.setColor(getResources().getColor(R.color.colorAccent));
         //count is added
         menu_notification.setText("12");
-        menu_favourite.setGravity(Gravity.CENTER_VERTICAL);
+        menu_favourite.setGravity(Gravity.CENTER);
         menu_favourite.setTypeface(null,Typeface.BOLD);
         menu_favourite.setPadding(20,0,20,0);
         menu_favourite.setBackgroundResource(R.drawable.menu_back);
-        menu_favourite.setTextSize(20);
-
-        menu_favourite.setTextColor(getResources().getColor(R.color.colorAccent));
+        menu_favourite.setTextSize(15);
         menu_favourite.setText("04");
         menu_favourite.setTextColor(getResources().getColor(R.color.colorWhite));
 //        menu_favourite.getLayoutParams().height=50;
@@ -161,17 +218,41 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
+            navItemIndex=0;
+            CURRENT_TAG=TAG_HOME;
+            Intent myIntent=new Intent(HomeActivity.this,HomeActivity.class);
+            startActivity(myIntent);
+           // recreate();
             // Handle the camera action
         } else if (id == R.id.nav_inbox) {
+            navItemIndex=1;
+            CURRENT_TAG=TAG_INBOX;
+            InboxFragment inboxFragment=new InboxFragment();
+            goToFragment(inboxFragment);
 
         } else if (id == R.id.nav_notification) {
+            navItemIndex=2;
+            CURRENT_TAG=TAG_NOTIFICATIONS;
 
         } else if (id == R.id.nav_favourite) {
+            FavoriteFragment favoriteFragment=new FavoriteFragment();
+            goToFragment(favoriteFragment);
 
         } else if (id == R.id.nav_shortcut) {
 
         } else if (id == R.id.nav_profile) {
-
+            ProfileFragment profileFragment=new ProfileFragment();
+            goToFragment(profileFragment);
+        }
+        else if (id==R.id.nav_requests){
+            AddRequestFragment profileFragment=new AddRequestFragment();
+            goToFragment(profileFragment);
+        }else if (id==R.id.nav_manage_sales){
+            ManageSalesFragment manageSalesFragment=new ManageSalesFragment();
+            goToFragment(manageSalesFragment);
+        }else if (id==R.id.nav_my_stacks){
+            MyStacksFragment myStacksFragment=new MyStacksFragment();
+            goToFragment(myStacksFragment);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -179,13 +260,83 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    private Fragment getHomeFragment(){
+        switch (navItemIndex){
+            case 0:
+                //home
+                 StacksFragment stacksFragment=new StacksFragment();
+                 return stacksFragment;
+            case 1:
+                InboxFragment inboxFragment=new InboxFragment();
+                return inboxFragment;
+
+            case 2:
+                FavoriteFragment favoriteFragment=new FavoriteFragment();
+                return favoriteFragment;
+
+            case 3:
+                RequestsFragment requestsFragment=new RequestsFragment();
+                return requestsFragment;
+
+                default:
+                    return new RequestsFragment();
+        }
+    }
+
+//    @Override
+//    public void onBackPressed() {
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawers();
+//            return;
+//        }
+//
+//        // This code loads home fragment when back key is pressed
+//        // when user is in other fragment than home
+////        if (shouldLoadHomeFragOnBackPress) {
+////            // checking if user is on other navigation menu
+////            // rather than home
+////            if (navItemIndex != 0) {
+////                navItemIndex = 0;
+////                CURRENT_TAG = TAG_HOME;
+////                loadHomeFragment();
+////                return;
+////            }
+//      //  }
+//
+//        super.onBackPressed();
+//    }
+
+    public void goToFragment(Fragment fragmentArg){
+
+        Fragment fragment = fragmentArg;
+        String backStateName = fragment.getClass().getName();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.containerHome, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
     @Override
     public void onFragmentInteraction(Uri uri) {
         Fragment fragment = new RequestDetailFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
+        String backStateName = fragment.getClass().getName();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentRequest, fragment);
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack(backStateName);
         fragmentTransaction.commit();
+    }
+
+
+
+
+    private void tellFragments() {
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        for (Fragment f : fragments) {
+            if (f != null && f instanceof BackableFragment)
+                ((BackableFragment) f).onBackButtonPressed();
+            break;
+        }
     }
 }

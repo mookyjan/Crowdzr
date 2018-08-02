@@ -8,25 +8,27 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
-            android:title="@string/menu_home" />
+            android:title="@string/menu_home"
+            />
+        <!--app:actionViewClass="android.widget.TextView"-->
         <item
             android:id="@+id/nav_inbox"
-            android:icon="@drawable/ic_inbox"
-            app:actionViewClass="android.widget.TextView"
+            android:icon="@drawable/ic_email"
+            app:actionLayout="@layout/inbox_counter"
             android:title="@string/menu_inbox" />
         <item
             android:id="@+id/nav_notification"
-            android:icon="@drawable/ic_menu_slideshow"
-            app:actionViewClass="android.widget.TextView"
+            android:icon="@drawable/ic_notification"
+            app:actionLayout="@layout/inbox_counter"
             android:title="@string/menu_notification" />
         <item
             android:id="@+id/nav_favourite"
             android:icon="@drawable/ic_favourite"
-            app:actionViewClass="android.widget.TextView"
+            app:actionLayout="@layout/inbox_counter"
             android:title="@string/menu_favourite" />
         <item
             android:id="@+id/nav_shortcut"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_menu_send"
             android:title="@string/menu_shortcuts" />
     </group>
 
@@ -34,17 +36,32 @@
         <menu>
             <item
                 android:id="@+id/nav_profile"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_profile"
                 android:title="@string/menu_profile" />
             <item
                 android:id="@+id/nav_requests"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_menu_slideshow"
                 android:title="@string/menu_myrequests" />
             <item
                 android:id="@+id/nav_manage_sales"
                 android:icon="@drawable/ic_sales"
                 android:title="@string/menu_manage_sales" />
+
+            <item
+                android:id="@+id/nav_my_stacks"
+                android:icon="@drawable/ic_stacks"
+                android:title="@string/menu_my_stacks" />
         </menu>
     </item>
+    <group>
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_setting"
+            android:title="@string/menu_settings"/>
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/ic_setting"
+            android:title="@string/menu_help"/>
+    </group>
 
 </menu>

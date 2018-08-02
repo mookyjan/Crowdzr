@@ -7,4 +7,5 @@
     <color name="colorTrending">#e75bcb</color>
     <color name="colorEndigSoon">#fb586a</color>
     <color name="colorWhite">#fff</color>
+    <color name="colorBlack">#000</color>
 </resources>

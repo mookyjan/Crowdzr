@@ -15,8 +15,8 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
-        android:src="@mipmap/ic_launcher"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -58,7 +58,7 @@
             android:id="@+id/edit_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_inbox"
+            android:drawableLeft="@drawable/ic_email"
             android:drawablePadding="@dimen/_5sdp"
             android:drawableTint="@android:color/black"
             android:hint="@string/txt_hint_email" />

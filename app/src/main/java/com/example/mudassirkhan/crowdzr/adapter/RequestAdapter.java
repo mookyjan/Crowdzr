@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mudassirkhan.crowdzr.R;
-import com.example.mudassirkhan.crowdzr.RequestItemModel;
+import com.example.mudassirkhan.crowdzr.model.RequestItemModel;
 import com.example.mudassirkhan.crowdzr.adapter.viewHolder.RequestViewHolder;
 
 import java.util.List;

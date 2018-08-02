@@ -9,16 +9,16 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.mudassirkhan.crowdzr.R;
-import com.example.mudassirkhan.crowdzr.RequestItemModel;
+import com.example.mudassirkhan.crowdzr.model.RequestItemModel;
 import com.example.mudassirkhan.crowdzr.adapter.RecyclerViewClickedInterface;
 import com.example.mudassirkhan.crowdzr.adapter.RequestAdapter;
 import com.example.mudassirkhan.crowdzr.ui.home.RequestDetailFragment;
-import com.example.mudassirkhan.crowdzr.ui.home.RequestsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +77,8 @@ public class StacksFragment extends Fragment implements RecyclerViewClickedInter
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        //to hide the option menu enable this
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -132,6 +134,8 @@ public class StacksFragment extends Fragment implements RecyclerViewClickedInter
         super.onDetach();
         mListener = null;
     }
+
+
 
     @Override
     public void onListItemClicked(int position, View view) {

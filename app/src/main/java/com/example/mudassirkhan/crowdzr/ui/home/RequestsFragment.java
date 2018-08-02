@@ -6,15 +6,19 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.mudassirkhan.crowdzr.HomeActivity;
 import com.example.mudassirkhan.crowdzr.R;
-import com.example.mudassirkhan.crowdzr.RequestItemModel;
+import com.example.mudassirkhan.crowdzr.SwingDetector;
+import com.example.mudassirkhan.crowdzr.model.RequestItemModel;
 import com.example.mudassirkhan.crowdzr.adapter.RecyclerViewClickedInterface;
 import com.example.mudassirkhan.crowdzr.adapter.RequestAdapter;
 
@@ -29,7 +33,7 @@ import java.util.List;
  * Use the {@link RequestsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RequestsFragment extends Fragment implements RecyclerViewClickedInterface {
+public class RequestsFragment extends Fragment implements RecyclerViewClickedInterface{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -38,13 +42,14 @@ public class RequestsFragment extends Fragment implements RecyclerViewClickedInt
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    HomeActivity homeActivity;
     View requestFragmentLayout;
     RecyclerView mRecyclerViewReviewList;
     RequestAdapter myRecyclerAdapter;
     private RecyclerViewClickedInterface mRecyclerViewClickedInterface;
     private OnFragmentInteractionListener mListener;
     private List<RequestItemModel> mRequestItemModelList;
-
+    SwingDetector swingDetector;
     public RequestsFragment() {
         // Required empty public constructor
     }
@@ -72,6 +77,7 @@ public class RequestsFragment extends Fragment implements RecyclerViewClickedInt
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+      //  setHasOptionsMenu(true);
     }
 
     @Override
@@ -80,9 +86,12 @@ public class RequestsFragment extends Fragment implements RecyclerViewClickedInt
         requestFragmentLayout=inflater.inflate(R.layout.fragment_requests, container, false);
         initViews();
         populateRecyclerView();
+
         // Inflate the layout for this fragment
         return requestFragmentLayout;
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -127,19 +136,31 @@ public class RequestsFragment extends Fragment implements RecyclerViewClickedInt
         mListener = null;
     }
 
+//    /**
+//     * to hide the search bar menu
+//     * @param menu
+//     */
+//
+//    @Override
+//    public void onPrepareOptionsMenu(Menu menu) {
+//        menu.findItem(R.id.action_search).setVisible(false);
+//        super.onPrepareOptionsMenu(menu);
+//    }
+
     @Override
     public void onListItemClicked(int position, View view) {
 
         Toast.makeText(getActivity(),"clicked "+position,Toast.LENGTH_SHORT).show();
 
-
         Fragment fragment = new RequestDetailFragment();
+        String backStateName = fragment.getClass().getName();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.drawer_layout, fragment);
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack(backStateName);
         fragmentTransaction.commit();
     }
+
 
     /**
      * This interface must be implemented by activities that contain this
