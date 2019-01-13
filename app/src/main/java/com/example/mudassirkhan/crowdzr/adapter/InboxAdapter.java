@@ -15,9 +15,13 @@ import java.util.List;
 public class InboxAdapter extends RecyclerView.Adapter<InboxViewHolder> {
 
     private List<InboxViewModel> mInboxModelList;
-
-    public InboxAdapter(List<InboxViewModel> mInboxModelList){
+    private InboxItemClickListener mInboxItemClickListener;
+    public interface InboxItemClickListener{
+        public void onInboxClicked(InboxViewModel inboxViewModel);
+    }
+    public InboxAdapter(List<InboxViewModel> mInboxModelList,InboxItemClickListener mInboxItemClickListener){
         this.mInboxModelList=mInboxModelList;
+        this.mInboxItemClickListener=mInboxItemClickListener;
     }
 
     @NonNull
@@ -36,6 +40,13 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxViewHolder> {
         holder.txtItemName.setText(inboxViewModel.getStrItemName());
         holder.txtTime.setText(inboxViewModel.getStrTime());
         holder.txtDetail.setText(inboxViewModel.getStrItemDetail());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mInboxItemClickListener.onInboxClicked(inboxViewModel);
+            }
+        });
     }
 
     @Override

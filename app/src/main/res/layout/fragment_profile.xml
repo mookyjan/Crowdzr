@@ -7,6 +7,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.profile.ProfileFragment">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:src="@drawable/img_bg"
+        android:scaleType="fitXY"
+        />
+
     <!-- TODO: Update blank fragment layout -->
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgUserProfile"
@@ -21,6 +28,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
 
 
@@ -49,6 +58,7 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:textStyle="bold"
         android:gravity="center"
+        android:textColor="@color/colorWhite"
         android:text="@string/txt_user_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -64,6 +74,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:textColor="@color/colorWhite"
         android:text="@string/txt_user_email"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left"
@@ -101,7 +112,7 @@
 
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_200sdp"
         android:layout_height="wrap_content"
         android:id="@+id/txtBalance"
         android:layout_marginEnd="8dp"
@@ -113,6 +124,7 @@
         android:background="@drawable/rounded_button"
         android:backgroundTint="@color/colorWhite"
         android:padding="@dimen/_10sdp"
+        android:gravity="center"
         android:text="@string/txt_balance"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left"

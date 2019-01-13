@@ -8,4 +8,7 @@
     <color name="colorEndigSoon">#fb586a</color>
     <color name="colorWhite">#fff</color>
     <color name="colorBlack">#000</color>
+
+    <color name="progress_bar_indicator_color">#808080</color>
+    <color name="progress_bar_background_color">#dad3d3d3</color>
 </resources>

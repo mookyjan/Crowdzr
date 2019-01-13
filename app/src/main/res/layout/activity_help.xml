@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.help.HelpActivity">
+
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@color/colorPrimaryDark"
+        android:drawableLeft="@drawable/ic_back"
+        android:gravity="center"
+        android:text="@string/menu_help"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_15sdp" />
+
+    <TextView
+        android:id="@+id/txt_help_tutorial"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/menu_help"
+        app:layout_constraintBottom_toTopOf="@+id/txt_education"
+        app:layout_constraintTop_toBottomOf="@+id/txt_title"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/txt_education"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/txt_education"
+        app:layout_constraintBottom_toTopOf="@+id/txt_feed_back"
+        app:layout_constraintTop_toBottomOf="@+id/txt_help_tutorial"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/txt_feed_back"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/txt_feed_back"
+        app:layout_constraintBottom_toTopOf="@+id/txt_forum"
+        app:layout_constraintTop_toBottomOf="@+id/txt_education"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/txt_forum"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/txt_forum"
+        app:layout_constraintBottom_toTopOf="@+id/txt_blog"
+        app:layout_constraintTop_toBottomOf="@+id/txt_feed_back"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/txt_blog"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/txt_blog"
+        app:layout_constraintBottom_toTopOf="@+id/txt_how_to"
+        app:layout_constraintTop_toBottomOf="@+id/txt_forum"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/txt_how_to"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/txt_how"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_blog"
+        tools:layout_editor_absoluteX="0dp" />
+</android.support.constraint.ConstraintLayout>

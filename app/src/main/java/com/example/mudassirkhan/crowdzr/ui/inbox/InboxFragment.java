@@ -18,6 +18,7 @@ import com.example.mudassirkhan.crowdzr.adapter.InboxAdapter;
 import com.example.mudassirkhan.crowdzr.model.InboxViewModel;
 import com.example.mudassirkhan.crowdzr.ui.BackableFragment;
 import com.example.mudassirkhan.crowdzr.ui.home.RequestsFragment;
+import com.example.mudassirkhan.crowdzr.ui.sales.detail.MSDetailChatFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ import java.util.List;
  * Use the {@link InboxFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class InboxFragment extends BackableFragment {
+public class InboxFragment extends BackableFragment implements InboxAdapter.InboxItemClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -41,6 +42,7 @@ public class InboxFragment extends BackableFragment {
     HomeActivity homeActivity;
     List<InboxViewModel> mInboxModelList;
     RecyclerView mRecyclerViewInbox;
+    InboxAdapter.InboxItemClickListener inboxItemClickListener;
     public InboxFragment() {
         // Required empty public constructor
     }
@@ -98,7 +100,7 @@ public class InboxFragment extends BackableFragment {
 
         mRecyclerViewInbox=(RecyclerView)mParentView.findViewById(R.id.recyclerViewInbox);
         mInboxModelList=new ArrayList<>();
-
+        inboxItemClickListener=this;
         InboxViewModel inboxViewModel=new InboxViewModel("Chris","USB 2.0","2 Min ago","Hello ! I need about 8 designs.I am working ...");
         for (int i=0;i<8;i++){
             mInboxModelList.add(inboxViewModel);
@@ -108,7 +110,7 @@ public class InboxFragment extends BackableFragment {
     public void populateRecyclerView(){
 
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
-        InboxAdapter inboxAdapter=new InboxAdapter(mInboxModelList);
+        InboxAdapter inboxAdapter=new InboxAdapter(mInboxModelList,inboxItemClickListener);
         mRecyclerViewInbox.setAdapter(inboxAdapter);
         mRecyclerViewInbox.setLayoutManager(linearLayoutManager);
         inboxAdapter.notifyDataSetChanged();
@@ -129,12 +131,18 @@ public class InboxFragment extends BackableFragment {
 
     public void goToFragment(){
 
-        Fragment fragment = new RequestsFragment();
+        Fragment fragment = new MSDetailChatFragment();
         String backStateName = fragment.getClass().getName();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragInbox, fragment);
+        fragmentTransaction.replace(R.id.containerHome, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onInboxClicked(InboxViewModel inboxViewModel) {
+
+        goToFragment();
     }
 }

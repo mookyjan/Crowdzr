@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/login_layout"
     android:background="@android:color/white"
     tools:context=".LoginActivity">
 
@@ -60,6 +61,9 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_email"
             android:drawablePadding="@dimen/_5sdp"
+            android:inputType="textEmailAddress"
+            android:imeOptions="actionNext"
+            android:text="mk123"
             android:drawableTint="@android:color/black"
             android:hint="@string/txt_hint_email" />
     </android.support.design.widget.TextInputLayout>
@@ -84,6 +88,9 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@android:drawable/ic_lock_lock"
             android:drawablePadding="@dimen/_10sdp"
+            android:inputType="textPassword"
+            android:imeOptions="actionDone"
+            android:text="Mk@123456"
             android:drawableTint="@android:color/black"
             android:hint="@string/txt_hint_password" />
     </android.support.design.widget.TextInputLayout>
@@ -198,12 +205,30 @@
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_toRightOf="@+id/txt_no_account"
             android:autoLink="all"
+            android:id="@+id/txt_sign_up_here"
             android:gravity="center_vertical"
             android:linksClickable="true"
             android:text="@string/txt_sing_up_here"
             android:textColor="@android:color/white"
             android:textColorLink="@color/colorPrimary" />
     </RelativeLayout>
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/signin_progress_loading"
+        style="@style/AVLoadingIndicatorView"
+        android:visibility="gone"
+        app:indicatorName="LineSpinFadeLoaderIndicator"
+        app:indicatorColor="@color/progress_bar_indicator_color"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="2dp"
+        android:padding="@dimen/_10sdp"
+        android:background="@color/progress_bar_background_color"
+        />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline_vertical_left"

@@ -1,10 +1,17 @@
 <resources>
     <string name="app_name">CrowdZr</string>
     <string name="txt_sign_in_title">SIGN IN</string>
+    <string name="txt_sign_up">SIGN UP</string>
+    <string name="txt_first_name">First Name</string>
+    <string name="txt_last_name">Last Name</string>
+    <string name="txt_user_name_hint">User Name</string>
     <string name="txt_hint_email">Email</string>
     <string name="txt_hint_password">Password</string>
+    <string name="txt_repeat_password">Repeat Password</string>
     <string name="txt_forgot_password">FORGOT PASSWORD?</string>
     <string name="txt_sign_in_with">SIGN IN WITH</string>
+    <string name="txt_sign_up_with">SIGN UP WITH</string>
+    <string name="txt_terms_condition">I agree with <u>TERMS &amp; Conditions</u></string>
     <string name="txt_no_account">If you don\'t have account </string>
     <string name="txt_sing_up_here"><a href="http://www.google.com">SIGN UP HERE</a></string>
     <string name="title_activity_home">Home</string>
@@ -103,7 +110,36 @@
     <string name="txt_in_progress">IN Progress</string>
 
 
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="txt_education">Education</string>
+    <string name="txt_feed_back">Leave Feedback</string>
+    <string name="txt_forum">Forum</string>
+    <string name="txt_blog">Blog</string>
+    <string name="txt_how">How to?</string>
+
+    <string name="invalid_username">Authentication failed. invalid username</string>
+    <string name="invalid_password">Authentication failed. invalid password</string>
+    <string name="error_email_not_exist">This email does not exist on server</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_password">Error password doesnot match</string>
+    <string name="error_field_required">This field is required</string>
+
+    <!-- Network Error -->
+    <string name="network_fail_message">No internet connection. Make sure that Wi-Fi or cellular mobile data is turned on,
+        then try again.</string>
+    <!-- Retry -->
+    <string name="retry">Retry</string>
+    <!-- Api Errors -->
+    <string name="server_error">An unexpected error has been occurred.</string>
+    <string name="client_error">The requested resource could not be found but may be available in the future.</string>
+    <string name="unauthenticated_error">User is not authenticated.</string>
+    <string name="settings">Settings</string>
+
+    <string name="network_error">Network Error</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
 </resources>

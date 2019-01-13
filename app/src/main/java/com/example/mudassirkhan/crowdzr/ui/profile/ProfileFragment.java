@@ -95,7 +95,8 @@ public class ProfileFragment extends BackableFragment implements RecyclerViewCli
         homeActivity.viewPager.setVisibility(View.GONE);
         homeActivity.toolbar.setVisibility(View.VISIBLE);
         homeActivity.toolbar.setTitle(getResources().getString(R.string.menu_profile));
-        homeActivity.toolbar.setBackground(null);
+        homeActivity.toolbar.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+        homeActivity.toolbar.setVisibility(View.GONE);
         //homeActivity.toolbar.setBackgroundColor(ContextCompat.getColor(getActivity(),android.R.color.transparent));
         homeActivity.getSupportActionBar().setHomeButtonEnabled(true);
         // Inflate the layout for this fragment

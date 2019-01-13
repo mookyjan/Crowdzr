@@ -29,6 +29,7 @@ import android.widget.TextView;
 import com.example.mudassirkhan.crowdzr.adapter.HomePagerAdapter;
 import com.example.mudassirkhan.crowdzr.ui.BackableFragment;
 import com.example.mudassirkhan.crowdzr.ui.favorite.FavoriteFragment;
+import com.example.mudassirkhan.crowdzr.ui.help.HelpActivity;
 import com.example.mudassirkhan.crowdzr.ui.home.RequestDetailFragment;
 import com.example.mudassirkhan.crowdzr.ui.home.RequestsFragment;
 import com.example.mudassirkhan.crowdzr.ui.inbox.InboxFragment;
@@ -61,17 +62,31 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private static final String TAG_NOTIFICATIONS = "notifications";
     private static final String TAG_SETTINGS = "settings";
     public static String CURRENT_TAG = TAG_HOME;
+
+    String currentUserId="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-         toolbar = (Toolbar) findViewById(R.id.toolbar);
+         initViews();
+    }
+
+    private void initViews(){
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-         tabLayout=(TabLayout)findViewById(R.id.tab_layout);
-         viewPager=(ViewPager)findViewById(R.id.viewPagerHome);
+        tabLayout=(TabLayout)findViewById(R.id.tab_layout);
+        viewPager=(ViewPager)findViewById(R.id.viewPagerHome);
         HomePagerAdapter homePagerAdapter=new HomePagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(homePagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        try {
+            currentUserId=getIntent().getStringExtra("userId");
+        }catch (Exception e){
+
+        }
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -97,7 +112,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         viewAppBar=(View)findViewById(R.id.app_bar_home);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -253,6 +268,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }else if (id==R.id.nav_my_stacks){
             MyStacksFragment myStacksFragment=new MyStacksFragment();
             goToFragment(myStacksFragment);
+        }else if (id==R.id.nav_help){
+            Intent myIntent=new Intent(HomeActivity.this, HelpActivity.class);
+            startActivity(myIntent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

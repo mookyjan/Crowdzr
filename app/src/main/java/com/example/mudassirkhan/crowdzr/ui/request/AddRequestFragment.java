@@ -4,6 +4,8 @@ package com.example.mudassirkhan.crowdzr.ui.request;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.mudassirkhan.crowdzr.HomeActivity;
 import com.example.mudassirkhan.crowdzr.R;
@@ -18,6 +22,7 @@ import com.example.mudassirkhan.crowdzr.adapter.FavoriteAdapter;
 import com.example.mudassirkhan.crowdzr.adapter.RecyclerViewClickedInterface;
 import com.example.mudassirkhan.crowdzr.model.RequestItemModel;
 import com.example.mudassirkhan.crowdzr.ui.BackableFragment;
+import com.example.mudassirkhan.crowdzr.ui.stack.AddStackFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +48,7 @@ public class AddRequestFragment  extends BackableFragment implements RecyclerVie
     FavoriteAdapter myRecyclerAdapter;
     private RecyclerViewClickedInterface mRecyclerViewClickedInterface;
     private List<RequestItemModel> mMyRequestItemModelList;
+    ImageView btnAddRequest;
     public AddRequestFragment() {
         // Required empty public constructor
     }
@@ -98,6 +104,7 @@ public class AddRequestFragment  extends BackableFragment implements RecyclerVie
 
     public void initViews() {
         mRecyclerViewMyRequest = (RecyclerView) mParentView.findViewById(R.id.recyclerviewMyRequests);
+        btnAddRequest=mParentView.findViewById(R.id.btnAddRequest);
         mMyRequestItemModelList = new ArrayList<>();
         mRecyclerViewClickedInterface = this;
         RequestItemModel requestItemModel = new RequestItemModel("USB 2.0", "$19.0", "Expiring in 6 days 2 hour", "2000", "3000");
@@ -105,6 +112,22 @@ public class AddRequestFragment  extends BackableFragment implements RecyclerVie
             mMyRequestItemModelList.add(requestItemModel);
         }
 
+        btnAddRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToPostRequestFrag();
+            }
+        });
+
+    }
+
+    private void goToPostRequestFrag(){
+        Fragment fragment = new AddStackFragment();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragAddRequest, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     public void populateRecyclerView() {

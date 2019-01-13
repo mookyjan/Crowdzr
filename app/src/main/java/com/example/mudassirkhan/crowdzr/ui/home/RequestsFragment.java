@@ -1,14 +1,18 @@
 package com.example.mudassirkhan.crowdzr.ui.home;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -18,12 +22,28 @@ import android.widget.Toast;
 import com.example.mudassirkhan.crowdzr.HomeActivity;
 import com.example.mudassirkhan.crowdzr.R;
 import com.example.mudassirkhan.crowdzr.SwingDetector;
+import com.example.mudassirkhan.crowdzr.api.CrowdZrServiceProvider;
+import com.example.mudassirkhan.crowdzr.api.eventmessages.BaseResponse;
+import com.example.mudassirkhan.crowdzr.api.eventmessages.ErrorHandlingAdapter;
+import com.example.mudassirkhan.crowdzr.api.request.PostRequestService;
 import com.example.mudassirkhan.crowdzr.model.RequestItemModel;
 import com.example.mudassirkhan.crowdzr.adapter.RecyclerViewClickedInterface;
 import com.example.mudassirkhan.crowdzr.adapter.RequestAdapter;
+import com.example.mudassirkhan.crowdzr.model.request.PostRequestResponse;
+import com.example.mudassirkhan.crowdzr.ui.errorprompt.PromptProvider;
+import com.example.mudassirkhan.crowdzr.ui.errorprompt.snackbar.SnackbarParams;
+import com.example.mudassirkhan.crowdzr.ui.errorprompt.snackbar.SnackbarPrompt;
+import com.example.mudassirkhan.crowdzr.util.AppConstants;
+import com.example.mudassirkhan.crowdzr.util.ConnectivityUtils;
+import com.example.mudassirkhan.crowdzr.util.UrlClass;
+import com.example.mudassirkhan.crowdzr.viewModel.PostRequestViewModel;
+import com.google.gson.JsonObject;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,7 +69,7 @@ public class RequestsFragment extends Fragment implements RecyclerViewClickedInt
     private RecyclerViewClickedInterface mRecyclerViewClickedInterface;
     private OnFragmentInteractionListener mListener;
     private List<RequestItemModel> mRequestItemModelList;
-    SwingDetector swingDetector;
+
     public RequestsFragment() {
         // Required empty public constructor
     }
@@ -84,12 +104,17 @@ public class RequestsFragment extends Fragment implements RecyclerViewClickedInt
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         requestFragmentLayout=inflater.inflate(R.layout.fragment_requests, container, false);
+        homeActivity=(HomeActivity) getActivity();
+
         initViews();
+        //initViewModel();
         populateRecyclerView();
 
         // Inflate the layout for this fragment
         return requestFragmentLayout;
     }
+
+
 
 
 
@@ -104,6 +129,7 @@ public class RequestsFragment extends Fragment implements RecyclerViewClickedInt
         //requestFragmentLayout=requestFragmentLayout.findViewById(R.id.recyclerViewRequest);
 
         mRecyclerViewReviewList=requestFragmentLayout.findViewById(R.id.recyclerViewRequest);
+
         mRequestItemModelList=new ArrayList<>();
         mRecyclerViewClickedInterface=this;
         RequestItemModel requestItemModel=new RequestItemModel("USB 2.0","$19.0","Expiring in 2 hours 5 minute","2000","3000");
@@ -111,6 +137,10 @@ public class RequestsFragment extends Fragment implements RecyclerViewClickedInt
             mRequestItemModelList.add(requestItemModel);
         }
     }
+
+
+
+
 
     public void populateRecyclerView(){
         myRecyclerAdapter=new RequestAdapter(getActivity(),mRequestItemModelList,mRecyclerViewClickedInterface);
@@ -155,7 +185,7 @@ public class RequestsFragment extends Fragment implements RecyclerViewClickedInt
         Fragment fragment = new RequestDetailFragment();
         String backStateName = fragment.getClass().getName();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        FragmentTransaction fragmentTransaction =getChildFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.drawer_layout, fragment);
         fragmentTransaction.addToBackStack(backStateName);
         fragmentTransaction.commit();

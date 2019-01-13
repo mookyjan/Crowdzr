@@ -61,7 +61,7 @@ public class RequestDetailFragment extends BackableFragment implements RecyclerV
     private RecyclerViewClickedInterface mRecyclerViewClickedInterface;
     CardView cardViewUser,cardViewBidNow,cardViewBidNowLayout,cardViewPostComment,cardViewPostCommentLayout;
     private OnFragmentInteractionListener mListener;
-
+    RequestsFragment mRequestFragment;
     public RequestDetailFragment() {
         // Required empty public constructor
     }
@@ -98,6 +98,8 @@ public class RequestDetailFragment extends BackableFragment implements RecyclerV
         if (container != null) {
             container.removeAllViews();
         }
+        //mRequestFragment=RequestsFragment.newInstance();
+      //  getChildFragmentManager().beginTransaction().replace(R.id.drawer_layout,mRequestFragment).addToBackStack(null).commit();
         // Inflate the layout for this fragment
         parentView=inflater.inflate(R.layout.fragment_request_detail, container, false);
         initViews(parentView);
